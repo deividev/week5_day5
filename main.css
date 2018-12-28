@@ -1,0 +1,236 @@
+* {
+    box-sizing: border-box;
+}
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.panel,
+.board {
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.panel {
+    flex-direction: column;
+    width: 35%;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+}
+
+.panel button {
+    border: 0;
+    border-radius: 6px;
+    padding: .6rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.panel button[type="submit"] {
+    margin-top: 1rem;
+    padding: 1.1rem 2rem;
+    background-color: #0080FF;
+    color: #fff;
+    font-size: 1.3em;
+}
+
+.panel label {
+    display: block;
+    margin-bottom: .6rem;
+}
+
+.panel select {
+    vertical-align: middle;
+    margin-bottom: 10px;
+    width: 100%;
+    min-width: 180px;
+    border: none;
+    color: #333;
+    font-size: 1rem;
+    border-radius: 6px;
+    box-shadow: inset 3px 3px 3px 0px rgba(220, 220, 220, .5);
+    background: rgba(white, .5);
+    padding: .8rem;
+    height: calc(2.5rem + 4px);
+    outline: none;
+}
+
+.panel .error-message {
+    color: #FA5882;
+    font-size: 0.85rem;
+    visibility: hidden;
+}
+
+.panel .error .error-message {
+    visibility: visible;
+}
+
+.board-wrapper {
+    display: flex;
+    position: relative;
+    width: calc(65% - 20px);
+}
+
+.board {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    background: #277714;
+    align-content: center;
+    box-shadow: inset 0 0 360px rgba(0, 0, 0, .4);
+}
+
+.card {
+    width: 140px;
+    height: 200px;
+    margin: 10px;
+    perspective: 400px;
+    animation: back-scale 2s;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.pair .card-inner {
+    cursor: default;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1) rotateY(0deg)
+    }
+    75% {
+        transform: scale(1.10) rotateY(-180deg)
+    }
+    100% {
+        transform: scale(1) rotateY(-180deg)
+    }
+}
+
+
+@keyframes back-scale {
+    0% {
+        opacity: 0;
+        transform: scale(1) rotateY(-180deg)
+    }
+    50% {
+        transform: scale(1.10) rotateY(0deg)
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg)
+    }
+}
+
+.card.active .card-inner {
+    animation: scale .8s;
+    transform: rotateY(-180deg);
+}
+
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .35);
+    background: #f2f2f2;
+;
+}
+.side.front img {
+    height: 100%;;
+}
+
+.side.back {
+    transform: rotateY(180deg);
+    border: 4px solid #fff;
+}
+.side.back img {
+    width: 100%;;
+}
+
+.popup-win {
+    transform: scale(.8);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    color: #fff;
+    font-size: 100px;
+    opacity: 0;
+    z-index: -1;
+    border-radius: 30px;
+}
+.popup-win.show {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 1s, opacity 1s;
+    z-index: 10;
+}
+
+.counter {
+    min-width: 150px;
+    font-size: 42pt;
+}
+
+.counter-label {
+    display: none;
+    margin-bottom: 0.4rem;
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+.counter-wrapper {
+    display: flex;
+    width: 100%;
+    height: 120px;
+    justify-content: center;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    padding: 1rem 1.6rem;
+    background-color: #000;
+}
+
+.counter-wrapper + button {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-bottom: 3rem;
+    background-color: #277714;
+    color: #fff;
+}
+
+.show .counter-label {
+    display: block;
+}
