@@ -53,8 +53,6 @@ function generateHtmlCard(value) {
     </div>`;
     return html;
 }
-
-
 /* 
 Este método comprueba si el juego ha finalizado. Habrá finalizado cuando el número de parejas
 encontradas sea igual al número de parejas 
@@ -67,7 +65,6 @@ function hasFinishedGame() {
 function finishGame() {
    
 }
-
 // Este método contendrá la lógica cuando se pincha en una carta.
 function selectCard() {
     // Aqui tendremos el código de mostrar la carta, si ya teniamos una seleccionada chequear si 
