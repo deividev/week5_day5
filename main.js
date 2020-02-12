@@ -36,8 +36,11 @@ function paintCards() {
        const idCard = element;
        $('.board').append(generateHtmlCard(idCard));
        $('.card').click(function(){
-        $('.card').toggleClass('active');
+       $('.card').toggleClass('active');
+        console.log(idCard);
       })
+     
+      
     });
     
 }
@@ -76,7 +79,7 @@ function finishGame() {
 function selectCard() {
     // Aqui tendremos el código de mostrar la carta, si ya teniamos una seleccionada chequear si 
     // iguales y realizar las acciones necesarias en el caso de que lo sean o no lo sean.
-
+    paintCards(element)
 
     if (hasFinishedGame()) {
         finishGame();
