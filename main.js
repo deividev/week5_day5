@@ -32,6 +32,13 @@ function initCards() {
 
 // Este método pintará las cartas según la disposición en el array cards
 function paintCards() {
+    cards.forEach(element => {
+       const idCard = element;
+       $('.board').append(generateHtmlCard(idCard));
+       $('.card').click(function(){
+        $('.card').toggleClass('active');
+      })
+    });
     
 }
 
@@ -43,11 +50,11 @@ en ella
 function generateHtmlCard(value) {
     const html = `<div class="card" data-value="${value}">
         <div class="card-inner">
-            <div class="side back">
-                <img src="assets/imgs/${value}.png">
-            </div>
             <div class="side front">
                 <img src="assets/imgs/back-pokemon.png">
+            </div>
+            <div class="side back">
+                <img src="assets/imgs/${value}.png">
             </div>
         </div>
     </div>`;
