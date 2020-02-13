@@ -8,7 +8,7 @@ let cards;
 // Numero de parejas que habrá en el juego
 let numPairs = 2;
 
-let selectedCard = null;
+let selectedCard = -1;
 
 // Numero de movimientos realizados
 let moves = 0;
@@ -35,12 +35,10 @@ function paintCards() {
     cards.forEach(element => {
        const idCard = element;
        $('.board').append(generateHtmlCard(idCard));
-       $('.card').click(function(){
-       $('.card').toggleClass('active');
-        console.log(idCard);
       })
-     
-      
+      $('.front').click(function(){
+        const card = $(this).parent().parent();
+        selectCard(card);
     });
     
 }
@@ -73,21 +71,34 @@ function hasFinishedGame() {
 
 // Este método tendra la logica a ejecutar cuando el juego finalice
 function finishGame() {
-   
+   $('.popup-win').addClass('show');
 }
 // Este método contendrá la lógica cuando se pincha en una carta.
-function selectCard() {
+function selectCard(card) {
     // Aqui tendremos el código de mostrar la carta, si ya teniamos una seleccionada chequear si 
+    card.addClass('active')
+    if (selectedCard === card.data('value')) {
+        // coinciden
+        findedPairs++;
+        selectedCard = -1;
+    } else if(selectedCard > -1) {
+        const selector = `.card[data-value=${selectedCard}]`;
+        selectedCard = -1;
+        setTimeout(function(){
+            card.removeClass('active');
+            $(selector).removeClass('active');
+        }, 1000);
+    } else {
+        selectedCard = card.data('value');
+    }
     // iguales y realizar las acciones necesarias en el caso de que lo sean o no lo sean.
-    paintCards(element)
-
-    if (hasFinishedGame()) {
+    if(hasFinishedGame()) {
         finishGame();
     }
 }
 
 function initCounters() {
-    selectedCard = null;
+    selectedCard = -1;
     moves = 0;
     findedPairs = 0;
 }
