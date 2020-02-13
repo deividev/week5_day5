@@ -159,9 +159,11 @@ btnStart.click(function () {
 
 
 //Reset Game
-$('#resetear').click(() => setTimeout(resetGame, 100));
 
 const resetGame = () => location.reload();
+$('#resetear').click(() => setTimeout(resetGame, 100));
+
+
 
 /*function resetGame() {
     location.reload();
