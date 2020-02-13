@@ -6,7 +6,7 @@ un posible valor del array seria [0,1,1,0]
 */
 let cards;
 // Numero de parejas que habrá en el juego
-let numPairs = 2;
+let numPairs = 0;
 
 let selectedCard = -1;
 
@@ -82,6 +82,8 @@ function finishGame() {
 // Este método contendrá la lógica cuando se pincha en una carta.
 function selectCard(card) {
     // Aqui tendremos el código de mostrar la carta, si ya teniamos una seleccionada chequear si 
+    // iguales y realizar las acciones necesarias en el caso de que lo sean o no lo sean.
+    
     card.addClass('active')
     if (selectedCard === card.data('value')) {
         // coinciden
@@ -97,7 +99,7 @@ function selectCard(card) {
     } else {
         selectedCard = card.data('value');
     }
-    // iguales y realizar las acciones necesarias en el caso de que lo sean o no lo sean.
+    
     if(hasFinishedGame()) {
         finishGame();
     }
@@ -113,14 +115,7 @@ function initCounters() {
     findedPairs = 0;
     seconds = 0;
 
-    //Counter moves and seconds with odometer
-    $('#counter-seconds, #counter-moves').addClass('odometer odometer-theme-digital');
-    $('#counter-moves.odometer').text(moves);
-    $('#counter-seconds.odometer').text(seconds);
-    timeCounter = setInterval(function () {
-        seconds++;
-        $('#counter-seconds.odometer').text(seconds);
-    }, 1000);
+    
 }
 
 function startGame(level) {
@@ -132,15 +127,39 @@ function startGame(level) {
 
 
 
-$(document).ready(function () {
+/*$(document).ready(function () {
    startGame(numPairs);
-});
+});*/
 
 
 //Start Game
 
+let btnStart = $('#start');
+
+btnStart.click(function () {
+    btnStart.attr('disabled', true)
+    //Select == number pairs
+    let numPairs = $('select').val();
+    startGame(numPairs);
+
+    //Counter moves and seconds with odometer
+    $('#counter-seconds, #counter-moves').addClass('odometer odometer-theme-digital');
+    $('#counter-moves.odometer').text(moves);
+    $('#counter-seconds.odometer').text(seconds);
+    timeCounter = setInterval(function () {
+        seconds++;
+        $('#counter-seconds.odometer').text(seconds);
+    }, 1000);
+})
+
+
+//Start Game without selecting level
+
+
+
+
 //Reset Game
-$('#resetear').click(() => setTimeout(resetGame, 00));
+$('#resetear').click(() => setTimeout(resetGame, 100));
 
 const resetGame = () => location.reload();
 
