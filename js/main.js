@@ -15,6 +15,9 @@ let moves = 0;
 // Numero de parejas encontradas
 let findedPairs = 0;
 
+// Contador
+let timeCounter = null;
+
 // Este método inicializa de forma aleatoria las cartas para que despues se puedan mostrar.
 function initCards() {
     cards = new Array(numPairs * 2);
@@ -95,12 +98,26 @@ function selectCard(card) {
     if(hasFinishedGame()) {
         finishGame();
     }
+    
+    moves++;
+
+    $('#counter-moves.odometer').text(moves);
 }
 
 function initCounters() {
     selectedCard = -1;
     moves = 0;
     findedPairs = 0;
+    seconds = 0;
+
+    //Counter moves and seconds with odometer
+    $('#counter-seconds, #counter-moves').addClass('odometer odometer-theme-digital');
+    $('#counter-moves.odometer').text(moves);
+    $('#counter-seconds.odometer').text(seconds);
+    timeCounter = setInterval(function () {
+        seconds++;
+        $('#counter-seconds.odometer').text(seconds);
+    }, 1000);
 }
 
 function startGame(level) {
@@ -115,3 +132,17 @@ function startGame(level) {
 $(document).ready(function () {
    startGame(numPairs);
 });
+
+
+//Start Game
+$('#start').click(function () {
+    $('#start').attr('disabled', true)
+    // Numero de parejas que habrá en el juego
+    let numPairs = parseInt($('select').val());
+    startGame(numPairs);
+})
+
+//Reset Game
+$('#resetear').click(function () {
+    location.reload();
+})
