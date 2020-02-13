@@ -74,7 +74,10 @@ function hasFinishedGame() {
 
 // Este método tendra la logica a ejecutar cuando el juego finalice
 function finishGame() {
-   $('.popup-win').addClass('show');
+   let fin = $('.popup-win').addClass('show');
+   setTimeout(function(fin){
+    location.reload();
+}, 1500);
 }
 // Este método contendrá la lógica cuando se pincha en una carta.
 function selectCard(card) {
@@ -135,14 +138,16 @@ $(document).ready(function () {
 
 
 //Start Game
-$('#start').click(function () {
-    $('#start').attr('disabled', true)
-    // Numero de parejas que habrá en el juego
-    let numPairs = parseInt($('select').val());
-    startGame(numPairs);
-})
 
 //Reset Game
-$('#resetear').click(function () {
+$('#resetear').click(() => setTimeout(resetGame, 00));
+
+const resetGame = () => location.reload();
+
+/*function resetGame() {
     location.reload();
-})
+}
+const resetGame = function () {
+    location.reload();
+};*/
+
