@@ -74,10 +74,9 @@ function hasFinishedGame() {
 
 // Este método tendra la logica a ejecutar cuando el juego finalice
 function finishGame() {
-   let fin = $('.popup-win').addClass('show');
-   setTimeout(function(fin){
-    location.reload();
-}, 1500);
+   setTimeout(function(){
+    $('.popup-win').addClass('show');
+}, 100);
 }
 // Este método contendrá la lógica cuando se pincha en una carta.
 function selectCard(card) {
@@ -139,7 +138,7 @@ let btnStart = $('#start');
 btnStart.click(function () {
     btnStart.attr('disabled', true)
     //Select == number pairs
-    let numPairs = $('select').val();
+    let numPairs = parseInt($('select').val());
     startGame(numPairs);
 
     //Counter moves and seconds with odometer
